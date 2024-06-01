@@ -2,13 +2,14 @@ package domains.account;
 
 import io.smallrye.common.constraint.NotNull;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public record AccountDTO(@NotNull Long id,
-                         @NotNull String userName,
-                         @NotNull @Email String email,
+                         @NotNull @NotBlank String userName,
+                         @NotNull @NotBlank @Email String email,
                          Boolean active) {
 
     public static AccountDTO from(Account account) {

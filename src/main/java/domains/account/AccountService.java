@@ -24,6 +24,8 @@ public class AccountService {
     }
 
     public Account createNewAccount(Account account) {
+        account.id = null;
+        account.active = true;
         account.persist();
         if (account.isPersistent()) {
             return account;
