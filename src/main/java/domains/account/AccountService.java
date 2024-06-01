@@ -14,6 +14,10 @@ public class AccountService {
         return Account.findAlive();
     }
 
+    public Account getAccountByName(String name) {
+        return Account.findByName(name);
+    }
+
     public Account getAccountById(Long id) {
         Optional<Account> accountOptional = Account.findByIdOptional(id);
         return accountOptional.orElseThrow(NotFoundException::new);
@@ -25,5 +29,13 @@ public class AccountService {
             return account;
         }
         else throw new InternalServerErrorException();
+    }
+
+    public Account updateAccount(Long id, Account account) {
+        Account entity = Account.findById(id);
+        entity.email = account.email;
+        entity.userName = account.userName;
+        entity.active = account.active;
+        return Account.findById(entity.id);
     }
 }

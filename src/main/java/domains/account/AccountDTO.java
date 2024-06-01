@@ -6,12 +6,13 @@ import jakarta.validation.constraints.Email;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public record AccountDTO(@NotNull String userName,
+public record AccountDTO(@NotNull Long id,
+                         @NotNull String userName,
                          @NotNull @Email String email,
                          Boolean active) {
 
     public static AccountDTO from(Account account) {
-        return new AccountDTO(account.userName, account.email, account.active);
+        return new AccountDTO(account.id,account.userName, account.email, account.active);
     }
 
     public static List<AccountDTO> from(List<Account> accounts) {
