@@ -1,5 +1,6 @@
 package domains.account;
 
+import domains.student.Student;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
@@ -7,6 +8,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "account")
+@NamedQueries({
+        @NamedQuery(name= "Account.getByStudentName", query = "from Account as a join a.student as s where s.name.firstName = ?1")
+})
 public class Account extends PanacheEntityBase {
 
     @Id
@@ -23,6 +27,9 @@ public class Account extends PanacheEntityBase {
     @Column(name = "active", nullable = false)
     public Boolean active;
 
+    @OneToOne(mappedBy = "account")
+    public Student student;
+
     public Account() {
     }
 
@@ -38,5 +45,9 @@ public class Account extends PanacheEntityBase {
 
     public static Account from (AccountDTO dto) {
         return new Account(dto.userName(), dto.email(), dto.active());
+    }
+
+    public static Account findByName(String name) {
+        return find("#Account.getByStudentName", name).firstResult();
     }
 }
