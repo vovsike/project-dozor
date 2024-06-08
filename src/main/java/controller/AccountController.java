@@ -35,11 +35,6 @@ public class AccountController {
         return AccountDTO.from(accountList);
     }
 
-    @GET
-    public AccountDTO listAccounts(@QueryParam("name") String name) {
-        return AccountDTO.from(service.getAccountByName(name));
-    }
-
     @POST
     public Response createAccount(@Valid AccountDTO dto) {
         Account createdAccount = service.createNewAccount(Account.from(dto));

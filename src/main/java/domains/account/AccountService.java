@@ -14,10 +14,6 @@ public class AccountService {
         return Account.findAlive();
     }
 
-    public Account getAccountByName(String name) {
-        return Account.findByName(name);
-    }
-
     public Account getAccountById(Long id) {
         Optional<Account> accountOptional = Account.findByIdOptional(id);
         return accountOptional.orElseThrow(NotFoundException::new);
