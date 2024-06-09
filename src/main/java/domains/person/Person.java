@@ -7,9 +7,8 @@ import jakarta.persistence.*;
 
 @Entity
 public class Person extends PanacheEntityBase {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "person_generator", sequenceName = "person_seq")
     public Long id;
 
     public PersonName name;
@@ -18,5 +17,6 @@ public class Person extends PanacheEntityBase {
     public PersonType type;
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @MapsId
     public Account account;
 }
